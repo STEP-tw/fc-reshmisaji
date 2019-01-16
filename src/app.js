@@ -1,8 +1,5 @@
 const fs = require("fs");
 
-const hide = function(arguments) {
-  return;
-};
 
 const app = (req, res) => {
   let fileName = "." + req.url;
