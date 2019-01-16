@@ -1,8 +1,25 @@
-const app = (req, res) => {
-  res.statusCode = 404;
-  res.end();
+const fs = require("fs");
+
+const hide = function(arguments) {
+  return;
 };
 
-// Export a function that can act as a handler
+const app = (req, res) => {
+  let fileName = "." + req.url;
+
+  res.statusCode = 200;
+  if (req.url == "/") {
+    fileName = "./dataFiles/index.html";
+  }
+
+  fs.readFile(fileName, (err, data) => {
+    try {
+      res.write(data);
+      res.end();
+    } catch (err) {
+      res.end();
+    }
+  });
+};
 
 module.exports = app;
