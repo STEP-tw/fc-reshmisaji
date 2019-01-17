@@ -1,7 +1,9 @@
 const fs = require("fs");
 
+let routes = { url: "/", method: "GET", action: "./dataFiles/index.html" };
+
 const getFilePath = function(url) {
-  if (url == "/") {
+  if (url == routes.url) {
     return "./dataFiles/index.html";
   }
   return "." + url;
