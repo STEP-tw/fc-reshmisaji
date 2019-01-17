@@ -6,7 +6,7 @@ const getFilePath = function(url) {
   if (url == routes.url) {
     return "./dataFiles/index.html";
   }
-  return "." + url;
+  return "./public" + url;
 };
 
 const sendResponse = function(res, statusCode, data) {
