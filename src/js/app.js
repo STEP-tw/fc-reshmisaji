@@ -22,7 +22,7 @@ const app = (req, res) => {
       sendResponse(
         res,
         404,
-        "The server has not found anything matching the Request-URI. "
+        "The server has not found anything matching the Request-URL."
       );
     }
   });
