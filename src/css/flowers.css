@@ -1,4 +1,28 @@
-.pot{
-  width:200px;
-  height:200px;
+header {
+  color: orange;
+  font-size: 30px;
+  font-family: serif;
+  text-align: right;
+  margin-right: 250px;
+  height: 45px;
+}
+
+main {
+  float: left;
+  width: 70%;
+  margin: auto;
+}
+
+section {
+  float: right;
+  width: 25%;
+  height: 650px;
+  margin-top: 200px;
+}
+
+.mainImage {
+  width: 1000px;
+  height: 620px;
+  margin-left: 50px;
+  border: 1px solid black;
 }

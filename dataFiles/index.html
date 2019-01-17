@@ -13,27 +13,24 @@
     </script>
   </head>
   <body>
-    <header
-      style="color:orangered;font-size: 30px;font-family: sans-serif ;text-align: center;height:50px"
-    >
-      Flower Catalog
-    </header>
+    <header>Flower Catalog</header>
     <hr />
     <main>
-      <img src="/images/freshorigins.jpg" alt="flowers" />
+      <img src="/images/freshorigins.jpg" class="mainImage" alt="flowers" />
+    </main>
+    <section>
       <ul>
         <li><a href="${Abeliophyllum}">Abeliophyllum</a></li>
         <li><a href="${Ageratum}"> Ageratum</a></li>
+        <img
+          src="/images/animated-flower-image-0021.gif"
+          id="flowers"
+          alt="Flower Pot"
+          class="pot"
+          onclick="hide()"
+        />
       </ul>
-      <img
-        src="/images/animated-flower-image-0021.gif"
-        id="flowers"
-        alt="Flower Pot"
-        class="pot"
-        onclick="hide()"
-      />
-
       <a href="${guestBook}">Guest Book</a>
-    </main>
+    </section>
   </body>
 </html>

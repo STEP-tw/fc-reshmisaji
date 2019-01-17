@@ -1,20 +1,29 @@
 const fs = require("fs");
 
+const getFilePath = function(url) {
+  if (url == "/") {
+    return "./dataFiles/index.html";
+  }
+  return "." + url;
+};
+
+const sendResponse = function(res, statusCode, data) {
+  res.statusCode = statusCode;
+  res.write(data);
+  res.end();
+};
 
 const app = (req, res) => {
-  let fileName = "." + req.url;
-
-  res.statusCode = 200;
-  if (req.url == "/") {
-    fileName = "./dataFiles/index.html";
-  }
-
-  fs.readFile(fileName, (err, data) => {
+  let filePath = getFilePath(req.url);
+  fs.readFile(filePath, (err, data) => {
     try {
-      res.write(data);
-      res.end();
+      sendResponse(res, 200, data);
     } catch (err) {
-      res.end();
+      sendResponse(
+        res,
+        404,
+        "The server has not found anything matching the Request-URI. "
+      );
     }
   });
 };
