@@ -1,23 +1,61 @@
 header {
   color: orange;
-  font-size: 30px;
+  font-size: 40px;
   font-family: serif;
   text-align: right;
   margin-right: 250px;
   height: 45px;
 }
 
-main {
+.left {
   float: left;
   width: 70%;
   margin: auto;
 }
 
-section {
+.right {
   float: right;
   width: 25%;
   height: 650px;
   margin-top: 200px;
+}
+
+label{
+  font-size: 30px;
+}
+
+input{
+  width:200px;
+  height:30px;
+  font-size: 20px;
+  border:0.1px solid rgb(141, 139, 139);
+}
+
+textarea{
+  columns:50;
+   rows:5;
+  font-size: 20px;
+  border:0.1px solid rgb(141, 139, 139);
+}
+
+.submitComment{
+  width:100px;
+  height:35px;
+  border:0.1px solid rgb(141, 139, 139);
+}
+
+.homeLink{
+  color:purple;
+  font-size: 40px
+}
+
+.guestBook{
+  color: orange;
+  font-size: 40px;
+  font-family: serif;
+  text-align: right;
+  margin-right: 500px;
+  height: 100px;
 }
 
 .mainImage {
@@ -25,4 +63,12 @@ section {
   height: 620px;
   margin-left: 50px;
   border: 1px solid black;
+}
+
+.data_field{
+  margin-left: 100px
+}
+
+.comments{
+  font-size: 30px;
 }
