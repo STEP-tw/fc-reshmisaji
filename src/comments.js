@@ -1,28 +1,23 @@
-const fs = require("fs");
-
-const putComment = function() {
-  let comments = fs.readFileSync("/dataFiles/comments.json", "utf8");
-  comments = comments.slice(0, -1);
-  console.log(comments);
-
-  let commentsObj = JSON.parse([comments]);
-  return `${commentsObj}`;
-};
-
-const addComment = function(res, args) {
-  let json = getArgsParsed(args);
-  fs.addFile("/dataFiles/comments.json", json + ",", function(err, data) {
-    res.write(putComment());
-    send(res, 200, "");
+const parsedObject = function(arguments) {
+  let data = {};
+  arguments.forEach(argument => {
+    let [key, value] = argument.split("=");
+    data[key] = value;
   });
+  return data;
 };
 
-const postHandler = function(req, res) {
-  let args = "";
-  req.on("data", chunk => (args = args + chunk));
-  req.on("end", function() {
-    addComment(res, args);
-  });
+const parser = function(argument) {
+  argument = argument.split("&");
+  return parsedObject(argument);
 };
 
-module.exports = { postHandler };
+const getArgsParsed = function(argument) {
+  let parsedObject = parser(argument);
+  parsedObject.dataTime = new Date().toDateString();
+  let json = JSON.stringify(parsedObject);
+
+  return json;
+};
+
+module.exports = { getArgsParsed };
