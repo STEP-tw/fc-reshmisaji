@@ -4,18 +4,24 @@ const { getArgsParsed } = require("./comments.js");
 const { getFilePath } = require("./files.js");
 const { sendResponse, show } = require("./utils.js");
 
-const commentsHandler = function(req, res) {
-  let data = "";
-  req.on("data", chunk => {
-    data += chunk;
-  });
+const readBody = (req, res, next) => {
+  let content = "";
+  req.on("data", chunk => (content += chunk));
   req.on("end", () => {
-    data = getArgsParsed(data);
-    comments.unshift(data);
-    comments = JSON.stringify(comments);
-    fs.writeFile("./src/comments.json", comments, err => {
-      show(res,fs);
-    });
+    req.body = content;
+    next();
+  });
+};
+
+const commentsHandler = function(req, res, comments) {
+  let data = req.body;
+  data = getArgsParsed(data);
+  data.name = unescape(data.name);
+  data.comment = unescape(data.comment);
+  comments.unshift(data);
+  comments = JSON.stringify(comments);
+  fs.writeFile("./src/comments.json", comments, err => {
+    show(res, fs);
   });
 };
 
@@ -35,7 +41,7 @@ const fileHandler = (req, res) => {
     });
     return;
   }
-  commentsHandler(req, res);
+  commentsHandler(req, res, comments);
 };
 
-module.exports = { commentsHandler, fileHandler };
+module.exports = { commentsHandler, fileHandler, readBody };

@@ -40,7 +40,7 @@ const prepareComments = function(comments) {
   comments = comments.slice(0, -1);
   comments = JSON.parse(`[${comments}]`);
   let guestComments = comments.map(comment => {
-    return `<tr><td>${comment.dataTime}</td><td>${comment.name}</td><td>${
+    return `<tr><td>${comment.dateTime}</td><td>${comment.name}</td><td>${
       comment.comment
     }</td></tr>`;
   });

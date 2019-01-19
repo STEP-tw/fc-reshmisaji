@@ -14,7 +14,7 @@ const parser = function(argument) {
 
 const getArgsParsed = function(argument) {
   let parsedObject = parser(argument);
-  parsedObject.dataTime = new Date().toDateString();
+  parsedObject.dateTime = new Date().toDateString();
   let json = JSON.stringify(parsedObject);
 
   return json;
