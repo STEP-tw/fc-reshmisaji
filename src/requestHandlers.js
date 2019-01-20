@@ -2,7 +2,7 @@ const fs = require("fs");
 let comments = require("./comments.json");
 const { getArgsParsed } = require("./comments.js");
 const { getFilePath } = require("./files.js");
-const { sendResponse, show } = require("./utils.js");
+const { sendResponse, show, guestPageHandler } = require("./guestPage.js");
 
 const readBody = (req, res, next) => {
   let content = "";
@@ -21,7 +21,7 @@ const commentsHandler = function(req, res, comments) {
   comments.unshift(data);
   comments = JSON.stringify(comments);
   fs.writeFile("./src/comments.json", comments, err => {
-    show(res, fs);
+    show(res);
   });
 };
 
@@ -43,5 +43,8 @@ const fileHandler = (req, res) => {
   }
   commentsHandler(req, res, comments);
 };
+const guestPage = function(req, res) {
+  guestPageHandler(res);
+};
 
-module.exports = { commentsHandler, fileHandler, readBody };
+module.exports = { commentsHandler, fileHandler, readBody, guestPage };

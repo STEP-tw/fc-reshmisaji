@@ -1,8 +1,6 @@
-const fs = require("fs");
 let comments = require("./comments.json");
 
-const showPage = function(comments) {
-  let html = `<!DOCTYPE html>
+const guestPage = `<!DOCTYPE html>
 <html>
   <head>
     <title>Guest Book</title>
@@ -26,13 +24,12 @@ const showPage = function(comments) {
     </form> </pre>
     </main>
     <hr />
-    <section id="comments"" class="comments">
-    <table border="2"><thead><td>DATE_TIME</td><td>NAME</td><td>COMMENTS_LIST</td></thead>
-    ${comments}</table>
-    </section>
-  </body>
-</html>`;
-  return html;
+    <table id="comments" border="2"><thead><td>DATE_TIME</td><td>NAME</td><td>COMMENTS_LIST</td></thead>`;
+
+const guestPageBottom = `</table></body></html>`;
+
+const showPage = function(comments) {
+  return guestPage + comments + guestPageBottom;
 };
 
 const prepareComments = function(comments) {
@@ -47,7 +44,7 @@ const prepareComments = function(comments) {
   return tbody + guestComments.join("") + "</tbody>";
 };
 
-const show = function(res, fs) {
+const show = function(res) {
   comments = prepareComments(comments);
   res.write(showPage(comments));
   res.end();
@@ -59,4 +56,11 @@ const sendResponse = function(res, statusCode, data) {
   res.end();
 };
 
-module.exports = { sendResponse, show };
+const guestPageHandler = function(res) {
+  let commentList = prepareComments(comments);
+  let guestPageHtml = showPage(commentList);
+  res.write(guestPageHtml);
+  res.end();
+};
+
+module.exports = { sendResponse, show, guestPageHandler };

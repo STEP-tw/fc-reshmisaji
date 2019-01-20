@@ -3,7 +3,8 @@ const FlowerCatalog = require("./flowerCatalog.js");
 const {
   commentsHandler,
   fileHandler,
-  readBody
+  readBody,
+  guestPage
 } = require("./requestHandlers.js");
 
 let app = new FlowerCatalog();
@@ -14,7 +15,7 @@ app.use(readBody);
 app.use(logRequestUrl);
 app.get("/", fileHandler);
 app.post("/guestBook.html", commentsHandler);
-app.get("/dataFiles/guestBook.html", fileHandler);
+app.get("/dataFiles/guestBook.html", guestPage);
 app.use(fileHandler);
 
 module.exports = app.handleRequest.bind(app);
