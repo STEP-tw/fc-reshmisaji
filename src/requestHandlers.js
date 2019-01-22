@@ -16,8 +16,6 @@ const readBody = (req, res, next) => {
 const commentsHandler = function(req, res, comments) {
   let data = req.body;
   data = getArgsParsed(data);
-  data.name = unescape(data.name);
-  data.comment = unescape(data.comment);
   comments.unshift(data);
   comments = JSON.stringify(comments);
   fs.writeFile("./src/comments.json", comments, err => {

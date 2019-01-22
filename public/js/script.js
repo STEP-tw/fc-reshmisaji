@@ -5,8 +5,15 @@ const hide = function() {
   }, 1000);
 };
 
-const postComment = function(a) {
-  console.log(a);
+const refreshComments = function() {
+  fetch("/dataFiles/guestBook.html")
+    .then(res => {
+      return res.text();
+    })
+    .then(comments => {
+      let commentsDiv = document.getElementById("userComments");
+      commentsDiv.innerHTML = document.getElementById("userComments").innerHTML;
+    });
 };
 
 window.onload = () => (document.getElementById("flowers").onclick = hide);

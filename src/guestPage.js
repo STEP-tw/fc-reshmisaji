@@ -24,9 +24,11 @@ const guestPage = `<!DOCTYPE html>
     </form> </pre>
     </main>
     <hr />
-    <table id="comments" border="2"><thead><td>DATE_TIME</td><td>NAME</td><td>COMMENTS_LIST</td></thead>`;
+    <h3> Comments <span><button onclick="refreshComments()">&#x21bb;</button></span></h3>
+    <div id="comments">
+    <table border="2" id="previousComments"><thead><td>DATE_TIME</td><td>NAME</td><td>COMMENTS_LIST</td></thead>`;
 
-const guestPageBottom = `</table></body></html>`;
+const guestPageBottom = `</table></div></body></html>`;
 
 const showPage = function(comments) {
   return guestPage + comments + guestPageBottom;

@@ -16,6 +16,7 @@ app.use(logRequestUrl);
 app.get("/", fileHandler);
 app.post("/guestBook.html", commentsHandler);
 app.get("/dataFiles/guestBook.html", guestPage);
+app.get("/displayComments", guestPage);
 app.use(fileHandler);
 
 module.exports = app.handleRequest.bind(app);
