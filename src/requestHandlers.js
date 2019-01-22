@@ -23,24 +23,27 @@ const commentsHandler = function(req, res, comments) {
   console.log(comments);
 
   fs.writeFile("./public/dataFiles/comments.json", comments, err => {});
-  res.write(comments);
-  res.end();
+  let filePath = getFilePath(req.url);
+  appendComments(res, filePath);
 };
 
-const getContents = function(req, res) {
-  let filePath = getFilePath(req.url);
-  fs.readFile(filePath, (err, data) => {
-    try {
-      sendResponse(res, 200, data);
-    } catch (err) {
+const appendComments = function(res, path) {
+  fs.readFile(path, (err, data) => {
+    if (err) {
       sendResponse(
         res,
         404,
         "The server has not found anything matching the Request-URL."
       );
+      return;
     }
+    sendResponse(res, 200, data);
   });
-  return;
+};
+
+const getContents = function(req, res) {
+  let filePath = getFilePath(req.url);
+  appendComments(res, filePath);
 };
 
 const fileHandler = (req, res) => {
