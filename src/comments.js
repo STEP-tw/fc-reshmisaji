@@ -2,7 +2,7 @@ const parsedObject = function(arguments) {
   let data = {};
   arguments.forEach(argument => {
     let [key, value] = argument.split("=");
-    data[key] = value;
+    data[key] = decodeURIComponent(value).replace(/\+/g, " ");
   });
   return data;
 };
@@ -15,8 +15,7 @@ const parser = function(argument) {
 const getArgsParsed = function(argument) {
   let parsedObject = parser(argument);
   parsedObject.dateTime = new Date();
-  let json = JSON.stringify(parsedObject);
-  return json;
+  return parsedObject;
 };
 
 module.exports = { getArgsParsed };

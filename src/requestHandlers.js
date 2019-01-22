@@ -1,5 +1,5 @@
 const fs = require("fs");
-let comments = require("./comments.json");
+let comments = require("../public/dataFiles/comments.json");
 const { getArgsParsed } = require("./comments.js");
 const { getFilePath } = require("./files.js");
 const { sendResponse, show, guestPageHandler } = require("./guestPage.js");
@@ -17,30 +17,40 @@ const commentsHandler = function(req, res, comments) {
   let data = req.body;
   data = getArgsParsed(data);
   comments.unshift(data);
+  console.log(comments);
+
   comments = JSON.stringify(comments);
-  fs.writeFile("./src/comments.json", comments, err => {
-    show(res);
+  console.log(comments);
+
+  fs.writeFile("./public/dataFiles/comments.json", comments, err => {});
+  res.write(comments);
+  res.end();
+};
+
+const getContents = function(req, res) {
+  let filePath = getFilePath(req.url);
+  fs.readFile(filePath, (err, data) => {
+    try {
+      sendResponse(res, 200, data);
+    } catch (err) {
+      sendResponse(
+        res,
+        404,
+        "The server has not found anything matching the Request-URL."
+      );
+    }
   });
+  return;
 };
 
 const fileHandler = (req, res) => {
   if (req.method == "GET") {
-    let filePath = getFilePath(req.url);
-    fs.readFile(filePath, (err, data) => {
-      try {
-        sendResponse(res, 200, data);
-      } catch (err) {
-        sendResponse(
-          res,
-          404,
-          "The server has not found anything matching the Request-URL."
-        );
-      }
-    });
+    getContents(req, res);
     return;
   }
   commentsHandler(req, res, comments);
 };
+
 const guestPage = function(req, res) {
   guestPageHandler(res);
 };

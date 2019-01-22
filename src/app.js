@@ -11,12 +11,19 @@ let app = new FlowerCatalog();
 const logRequestUrl = function(req, res, next) {
   next();
 };
+
+const getComments = function(req, res, next) {
+  res.write("dfgfdg ");
+  res.end();
+};
+
 app.use(readBody);
 app.use(logRequestUrl);
 app.get("/", fileHandler);
 app.post("/guestBook.html", commentsHandler);
-app.get("/dataFiles/guestBook.html", guestPage);
-app.get("/displayComments", guestPage);
+app.get("/guestBook.html", fileHandler);
+app.use(fileHandler);
+app.get("/dataFiles/guestBook.html", fileHandler);
 app.use(fileHandler);
 
 module.exports = app.handleRequest.bind(app);
