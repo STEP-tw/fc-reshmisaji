@@ -2,7 +2,7 @@ const prepareComments = function(comments) {
   let guestComments = comments.map(comment => {
     return `<tr>
     <td>${comment.dateTime}</td>
-    <td>${comment.name}</td>
+    <td><b>${comment.name}</b></td>
     <td>${comment.comment}</td>
     </tr>`;
   });
