@@ -1,7 +1,6 @@
 const fs = require("fs");
 let comments = require("../public/dataFiles/comments.json");
-const { getArgsParsed } = require("./comments.js");
-const { getFilePath } = require("./files.js");
+const { getArgsParsed, getFilePath } = require("./dataHandler.js");
 const { sendResponse } = require("./responseHandler.js");
 
 const readBody = (req, res, next) => {
@@ -13,16 +12,17 @@ const readBody = (req, res, next) => {
   });
 };
 
+const addComments = function(comments, data) {
+  comments.unshift(data);
+  comments = JSON.stringify(comments);
+  fs.writeFile("./public/dataFiles/comments.json", comments, err => {});
+  return;
+};
+
 const commentsHandler = function(req, res, comments) {
   let data = req.body;
   data = getArgsParsed(data);
-  comments.unshift(data);
-  console.log(comments);
-
-  comments = JSON.stringify(comments);
-  console.log(comments);
-
-  fs.writeFile("./public/dataFiles/comments.json", comments, err => {});
+  addComments(comments, data);
   let filePath = getFilePath(req.url);
   appendComments(res, filePath);
 };

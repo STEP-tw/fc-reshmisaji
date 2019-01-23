@@ -18,4 +18,11 @@ const getArgsParsed = function(argument) {
   return parsedObject;
 };
 
-module.exports = { getArgsParsed };
+const getFilePath = function(url) {
+  if (url == "/") {
+    return "./public/dataFiles/index.html";
+  }
+  return "./public" + url;
+};
+
+module.exports = { getArgsParsed, getFilePath };

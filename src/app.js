@@ -1,4 +1,3 @@
-const fs = require("fs");
 const FlowerCatalog = require("./flowerCatalog.js");
 const {
   commentsHandler,
