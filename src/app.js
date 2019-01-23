@@ -3,18 +3,12 @@ const FlowerCatalog = require("./flowerCatalog.js");
 const {
   commentsHandler,
   fileHandler,
-  readBody,
-  guestPage
+  readBody
 } = require("./requestHandlers.js");
 
 let app = new FlowerCatalog();
 const logRequestUrl = function(req, res, next) {
   next();
-};
-
-const getComments = function(req, res, next) {
-  res.write("dfgfdg ");
-  res.end();
 };
 
 app.use(readBody);
